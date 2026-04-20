@@ -171,7 +171,7 @@ public class DoublyLinkedList {
         // ==================== DELETE OPERATIONS ====================
 
         /**
-         * Delete a node by its unique ID.
+         * Delete a node by its unique ID
          * Time Complexity: O(n)
          *
          * @param id The ID of the note to delete
