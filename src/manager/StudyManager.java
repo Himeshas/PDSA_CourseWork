@@ -1,4 +1,4 @@
-package Manager;
+package manager;
 
 public class StudyManager {
     // Edit each field (optional — press Enter to skip)
