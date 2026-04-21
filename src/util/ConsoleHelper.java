@@ -16,4 +16,15 @@ public class ConsoleHelper {
     public static final String WHITE   = "\u001B[37m";
     public static final String BOLD    = "\u001B[1m";
 
+    public static void printHeader(String title) {
+        int boxWidth = 50;
+        String border = "═".repeat(boxWidth);
+
+        System.out.println();
+        System.out.println(CYAN + "╔" + border + "╗" + RESET);
+        System.out.printf(CYAN + "║" + BOLD + " %-" + (boxWidth - 1) + "s" + RESET + CYAN + "║%n" + RESET, title);
+        System.out.println(CYAN + "╚" + border + "╝" + RESET);
+        System.out.println();
+    }
+
 }
