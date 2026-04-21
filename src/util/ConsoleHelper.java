@@ -180,6 +180,55 @@ public class ConsoleHelper {
     }
 
 
+    public static void printNavigationMenu() {
+        System.out.println();
+        System.out.println(CYAN + "╔═══════════════════════════════════╗" + RESET);
+        System.out.println(CYAN + "║" + BOLD + WHITE + "      NOTE NAVIGATION              " + RESET + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╠═══════════════════════════════════╣" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN + "  [N]" + RESET + " Next Note (Forward)       " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN + "  [P]" + RESET + " Previous Note (Backward)  " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN + "  [V]" + RESET + " View Current Note         " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + RED   + "  [B]" + RESET + " Back to Main Menu         " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╚═══════════════════════════════════╝" + RESET);
+    }
+
+    public static String readNavigationChoice(Scanner scanner) {
+        System.out.print(BOLD + "\n  👉 Enter choice (N/P/V/B): " + RESET);
+        return scanner.nextLine().trim().toUpperCase();
+    }
+
+    public static void printSearchMenu() {
+        System.out.println(CYAN + "╔═══════════════════════════════════╗" + RESET);
+        System.out.println(CYAN + "║" + BOLD + WHITE + "      SEARCH BY                    " + RESET + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╠═══════════════════════════════════╣" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN + "  1." + RESET + " Search by Title            " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN + "  2." + RESET + " Search by Subject          " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╚═══════════════════════════════════╝" + RESET);
+        System.out.print(BOLD + "\n  👉 Enter choice (1/2): " + RESET);
+    }
+
+    public static void printSortMenu() {
+        System.out.println(CYAN + "╔═══════════════════════════════════╗" + RESET);
+        System.out.println(CYAN + "║" + BOLD + WHITE + "      SORT BY                      " + RESET + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╠═══════════════════════════════════╣" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN + "  1." + RESET + " Sort by Priority           " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN + "  2." + RESET + " Sort by Revision Date      " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╚═══════════════════════════════════╝" + RESET);
+        System.out.print(BOLD + "\n  👉 Enter choice (1/2): " + RESET);
+    }
+
+    public static void printStudyPlanMenu() {
+        System.out.println(CYAN + "╔═══════════════════════════════════╗" + RESET);
+        System.out.println(CYAN + "║" + BOLD + WHITE + "      STUDY PLAN OPTIONS            " + RESET + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╠═══════════════════════════════════╣" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN + "  1." + RESET + " Generate Study Plan        " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN + "  2." + RESET + " Filter by Priority         " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN + "  3." + RESET + " Upcoming Revisions         " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╚═══════════════════════════════════╝" + RESET);
+        System.out.print(BOLD + "\n  👉 Enter choice (1/2/3): " + RESET);
+    }
+
+
 
 
 
