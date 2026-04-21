@@ -102,6 +102,63 @@ public class ConsoleHelper {
         }
     }
 
+    public static LocalDate readDateOptional(Scanner scanner, String prompt, LocalDate currentValue) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        System.out.print(YELLOW + "  " + prompt + " [" + currentValue.format(formatter) + "]: " + RESET);
+        String input = scanner.nextLine().trim();
+        if (input.isEmpty()) {
+            return currentValue;
+        }
+        try {
+            return LocalDate.parse(input, formatter);
+        } catch (DateTimeParseException e) {
+            printError("Invalid date format. Keeping current value: " + currentValue.format(formatter));
+            return currentValue;
+        }
+    }
+
+    public static int readIntOptional(Scanner scanner, String prompt, int currentValue, int min, int max) {
+        System.out.print(YELLOW + "  " + prompt + " [" + currentValue + "] (" + min + "-" + max + "): " + RESET);
+        String input = scanner.nextLine().trim();
+        if (input.isEmpty()) {
+            return currentValue;
+        }
+        try {
+            int value = Integer.parseInt(input);
+            if (value >= min && value <= max) {
+                return value;
+            }
+            printError("Value must be between " + min + " and " + max + ". Keeping current value.");
+            return currentValue;
+        } catch (NumberFormatException e) {
+            printError("Invalid number. Keeping current value: " + currentValue);
+            return currentValue;
+        }
+    }
+
+    public static void printMainMenu() {
+        System.out.println();
+        System.out.println(CYAN + "╔══════════════════════════════════════════════════╗" + RESET);
+        System.out.println(CYAN + "║" + BOLD + WHITE + "       📚 SMART STUDY NOTE MANAGER               " + RESET + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + WHITE + "       Powered by Doubly Linked List             " + RESET + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╠══════════════════════════════════════════════════╣" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN  + "  1." + RESET + "  Add New Note                              " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN  + "  2." + RESET + "  Edit Note                                 " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN  + "  3." + RESET + "  Delete Note                               " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN  + "  4." + RESET + "  View All Notes                            " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN  + "  5." + RESET + "  Search Notes                              " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN  + "  6." + RESET + "  Navigate Notes (Undo/Redo)                " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN  + "  7." + RESET + "  Priority-Based Study Plan                 " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN  + "  8." + RESET + "  Link Notes                                " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN  + "  9." + RESET + "  View Linked Notes                         " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + GREEN  + "  10." + RESET + " Sort Notes                                " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + "                                                  " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "║" + RESET + RED    + "  11." + RESET + " Exit                                      " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╚══════════════════════════════════════════════════╝" + RESET);
+    }
+
+
+
 
 
 
