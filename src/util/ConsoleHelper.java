@@ -158,6 +158,26 @@ public class ConsoleHelper {
     }
 
 
+    public static int readMenuChoice(Scanner scanner) {
+        System.out.print(BOLD + "\n  👉 Enter your choice: " + RESET);
+        String input = scanner.nextLine().trim();
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return -1;  // Invalid choice
+        }
+    }
+
+    public static boolean confirm(Scanner scanner, String prompt) {
+        System.out.print(YELLOW + "  " + prompt + " (y/n): " + RESET);
+        String input = scanner.nextLine().trim().toLowerCase();
+        return input.equals("y") || input.equals("yes");
+    }
+
+    public static void pressEnterToContinue(Scanner scanner) {
+        System.out.print(CYAN + "\n  Press Enter to continue..." + RESET);
+        scanner.nextLine();
+    }
 
 
 
