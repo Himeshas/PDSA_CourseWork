@@ -86,4 +86,48 @@ public class StudyManager {
         }
     }
 
+    private void moveForward() {
+        if (currentNote.next != null) {
+            currentNote = currentNote.next;
+            ConsoleHelper.printSuccess("Moved forward to: " + currentNote.getTitle());
+        } else {
+            ConsoleHelper.printWarning("Already at the END of the list. Cannot move forward.");
+        }
+    }
+
+    private void moveBackward() {
+        if (currentNote.prev != null) {
+            currentNote = currentNote.prev;
+            ConsoleHelper.printSuccess("Moved backward to: " + currentNote.getTitle());
+        } else {
+            ConsoleHelper.printWarning("Already at the BEGINNING of the list. Cannot move backward.");
+        }
+    }
+
+
+    private void viewCurrentNote() {
+        ConsoleHelper.printSubHeader("Note Details (ID: " + currentNote.getId() + ")");
+        System.out.println(currentNote.toString());
+    }
+
+
+    private int getPosition(NoteNode node) {
+        NoteNode current = noteList.getHead();
+        int pos = 1;
+        while (current != null) {
+            if (current == node) return pos;
+            current = current.next;
+            pos++;
+        }
+        return -1; // Should not happen
+    }
+
+
+
+
+
+
+
+
+
 }
