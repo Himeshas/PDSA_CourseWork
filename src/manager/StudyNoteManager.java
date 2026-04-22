@@ -7,6 +7,9 @@ import util.ConsoleHelper;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+
+
+
 public class StudyNoteManager {
 
     private DoublyLinkedList noteList;
@@ -37,7 +40,7 @@ public class StudyNoteManager {
         System.out.println("      3 = 🟡 Medium");
         System.out.println("      4 = 🟢 Low");
         System.out.println("      5 = 🔵 Optional");
-        int priority = ConsoleHelper.readInt(scanner, "Enter priority", 1, 5);
+        int priority = ConsoleHelper.readInt(scanner,"Enter priority",1,5);//readInt(scanner, "Enter priority", 1, 5);
 
         LocalDate revisionDate = ConsoleHelper.readDate(scanner, "Enter revision date");
 
@@ -65,7 +68,7 @@ public class StudyNoteManager {
         viewAllNotes();
 
         // Get the note ID to edit
-        int id = ConsoleHelper.readInt(scanner, "Enter the ID of the note to edit");
+        int id =ConsoleHelper.readInt(scanner, "Enter the ID of the note to edit",1,100);
         NoteNode note = noteList.getById(id);
 
         if (note == null) {
@@ -118,7 +121,7 @@ public class StudyNoteManager {
         viewAllNotes();
 
         // Get the note ID to delete
-        int id = ConsoleHelper.readInt(scanner, "Enter the ID of the note to delete");
+        int id = ConsoleHelper.readInt(scanner, "Enter the ID of the note to delete",1,100);
         NoteNode note = noteList.getById(id);
 
         if (note == null) {
@@ -184,7 +187,7 @@ public class StudyNoteManager {
             return;
         }
 
-        int id = ConsoleHelper.readInt(scanner, "Enter the note ID to view");
+        int id = ConsoleHelper.readInt(scanner, "Enter the note ID to view",1,100);
         NoteNode note = noteList.getById(id);
 
         if (note == null) {
@@ -374,7 +377,7 @@ public class StudyNoteManager {
                 generateStudyPlan();
                 break;
             case "2":
-                int level = ConsoleHelper.readInt(scanner, "Enter priority level", 1, 5);
+                int level =ConsoleHelper.readInt(scanner, "Enter priority level", 1, 5) ;
                 filterByPriority(level);
                 break;
             case "3":
@@ -479,8 +482,8 @@ public class StudyNoteManager {
         // Show all notes so user can pick
         viewAllNotes();
 
-        int id1 = ConsoleHelper.readInt(scanner, "Enter first note ID");
-        int id2 = ConsoleHelper.readInt(scanner, "Enter second note ID");
+        int id1 =ConsoleHelper.readInt(scanner, "Enter first note ID",1,100);
+        int id2 = ConsoleHelper.readInt(scanner, "Enter second note ID",1,100);
 
         if (id1 == id2) {
             ConsoleHelper.printError("Cannot link a note to itself.");
@@ -524,7 +527,7 @@ public class StudyNoteManager {
             return;
         }
 
-        int id = ConsoleHelper.readInt(scanner, "Enter note ID to view its links");
+        int id =ConsoleHelper.readInt(scanner, "Enter note ID to view its links",1,100);
         NoteNode note = noteList.getById(id);
 
         if (note == null) {
@@ -556,7 +559,7 @@ public class StudyNoteManager {
         // Offer to navigate to a linked note
         System.out.println();
         if (ConsoleHelper.confirm(scanner, "Jump cursor to a linked note?")) {
-            int jumpId = ConsoleHelper.readInt(scanner, "Enter linked note ID to jump to");
+            int jumpId = ConsoleHelper.readInt(scanner, "Enter linked note ID to jump to",1,100) ;
             NoteNode jumpNote = noteList.getById(jumpId);
             if (jumpNote != null && note.getLinkedNoteIds().contains(jumpId)) {
                 currentNote = jumpNote;
