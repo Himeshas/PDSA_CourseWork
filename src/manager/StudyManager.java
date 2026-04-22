@@ -241,6 +241,152 @@ public class StudyManager {
         ConsoleHelper.printInfo("Total notes in plan: " + noteList.getSize());
     }
 
+    private void filterByPriority(int level) {
+        String[] labels = {"", "Critical", "High", "Medium", "Low", "Optional"};
+        ConsoleHelper.printSubHeader("Notes with Priority " + level + " (" + labels[level] + ")");
+
+        NoteNode current = noteList.getHead();
+        boolean found = false;
+
+        while (current != null) {
+            if (current.getPriority() == level) {
+                System.out.println(current.toShortString());
+                found = true;
+            }
+            current = current.next;
+        }
+
+        if (!found) {
+            ConsoleHelper.printWarning("No notes found with priority " + level + ".");
+        }
+    }
+
+    private void showUpcomingRevisions() {
+        // Sort by revision date first (modifies DLL in-place)
+        noteList.sortByRevisionDate();
+
+        ConsoleHelper.printSubHeader("Upcoming Revisions (Earliest First)");
+
+        LocalDate today = LocalDate.now();
+        NoteNode current = noteList.getHead();
+
+        while (current != null) {
+            boolean overdue = current.getRevisionDate().isBefore(today);
+            String color = overdue ? ConsoleHelper.RED : ConsoleHelper.GREEN;
+            String status = overdue ? " ⚠️ OVERDUE" : "";
+
+            System.out.printf("  %s%-25s | Due: %s%s%s%n",
+                    color,
+                    current.getTitle(),
+                    current.getRevisionDate().toString(),
+                    status,
+                    ConsoleHelper.RESET);
+
+            current = current.next;
+        }
+
+        System.out.println();
+        ConsoleHelper.printInfo("Today's date: " + today.toString());
+    }
+
+    public void linkNotes(Scanner scanner) {
+        ConsoleHelper.printHeader("🔗 LINK NOTES");
+
+        if (noteList.getSize() < 2) {
+            ConsoleHelper.printWarning("Need at least 2 notes to create a link.");
+            return;
+        }
+
+        // Show all notes so user can pick
+        viewAllNotes();
+
+        int id1 = ConsoleHelper.readInt(scanner, "Enter first note ID");
+        int id2 = ConsoleHelper.readInt(scanner, "Enter second note ID");
+
+        if (id1 == id2) {
+            ConsoleHelper.printError("Cannot link a note to itself.");
+            return;
+        }
+
+        NoteNode note1 = noteList.getById(id1);
+        NoteNode note2 = noteList.getById(id2);
+
+        if (note1 == null) {
+            ConsoleHelper.printError("Note with ID " + id1 + " not found.");
+            return;
+        }
+        if (note2 == null) {
+            ConsoleHelper.printError("Note with ID " + id2 + " not found.");
+            return;
+        }
+
+        if (note1.getLinkedNoteIds().contains(id2)) {
+            ConsoleHelper.printWarning("These notes are already linked.");
+            return;
+        }
+
+        // Create bidirectional link
+        note1.addLinkedNoteId(id2);
+        note2.addLinkedNoteId(id1);
+
+        System.out.println();
+        ConsoleHelper.printDivider();
+        ConsoleHelper.printSuccess("Linked: \"" + note1.getTitle() + "\" (ID:" + id1
+                + ") ↔ \"" + note2.getTitle() + "\" (ID:" + id2 + ")");
+        ConsoleHelper.printDivider();
+    }
+
+    public void viewLinkedNotes(Scanner scanner) {
+        ConsoleHelper.printHeader("🔗 VIEW LINKED NOTES");
+
+        if (noteList.isEmpty()) {
+            ConsoleHelper.printWarning("No notes available. The list is empty.");
+            return;
+        }
+
+        int id = ConsoleHelper.readInt(scanner, "Enter note ID to view its links");
+        NoteNode note = noteList.getById(id);
+
+        if (note == null) {
+            ConsoleHelper.printError("Note with ID " + id + " not found.");
+            return;
+        }
+
+        ConsoleHelper.printSubHeader("Links for: \"" + note.getTitle() + "\" (ID: " + id + ")");
+
+        if (note.getLinkedNoteIds().isEmpty()) {
+            ConsoleHelper.printWarning("This note has no linked notes.");
+            ConsoleHelper.printInfo("Use option 8 (Link Notes) to create links.");
+            return;
+        }
+
+        System.out.println("  Linked Note IDs: " + note.getLinkedNoteIds());
+        System.out.println();
+
+        // Display each linked note
+        for (int linkedId : note.getLinkedNoteIds()) {
+            NoteNode linked = noteList.getById(linkedId);
+            if (linked != null) {
+                System.out.println(linked.toShortString());
+            } else {
+                ConsoleHelper.printWarning("Linked note ID " + linkedId + " no longer exists.");
+            }
+        }
+
+        // Offer to navigate to a linked note
+        System.out.println();
+        if (ConsoleHelper.confirm(scanner, "Jump cursor to a linked note?")) {
+            int jumpId = ConsoleHelper.readInt(scanner, "Enter linked note ID to jump to");
+            NoteNode jumpNote = noteList.getById(jumpId);
+            if (jumpNote != null && note.getLinkedNoteIds().contains(jumpId)) {
+                currentNote = jumpNote;
+                ConsoleHelper.printSuccess("Cursor moved to: \"" + jumpNote.getTitle() + "\" (ID: " + jumpId + ")");
+            } else {
+                ConsoleHelper.printError("Invalid linked note ID.");
+            }
+        }
+    }
+
 
 
 
