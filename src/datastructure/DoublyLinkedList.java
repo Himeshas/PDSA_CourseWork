@@ -7,14 +7,14 @@ import model.NoteNode;
 
 public class DoublyLinkedList {
 
-    public class DoublyLinkedList {
 
-        // ==================== DLL Core Pointers ====================
+
+        //  DLL Pointers
         private NoteNode head;  // Pointer to the first node
         private NoteNode tail;  // Pointer to the last node
         private int size;       // Number of nodes in the list
 
-        // ==================== Constructor ====================
+        //  Constructor
 
         /**
          * Initializes an empty Doubly Linked List.
@@ -25,7 +25,7 @@ public class DoublyLinkedList {
             this.size = 0;
         }
 
-        // ==================== Getters ====================
+
 
         public NoteNode getHead() {
             return head;
@@ -43,7 +43,7 @@ public class DoublyLinkedList {
             return size == 0;
         }
 
-        // ==================== INSERT OPERATIONS ====================
+        // INSERT OPERATIONS
 
         /**
          * Insert a new node at the END of the list.
@@ -168,7 +168,7 @@ public class DoublyLinkedList {
             }
         }
 
-        // ==================== DELETE OPERATIONS ====================
+        // DELETE OPERATIONS
 
         /**
          * Delete a node by its unique ID
@@ -221,7 +221,7 @@ public class DoublyLinkedList {
             return false;
         }
 
-        // ==================== SEARCH OPERATIONS ====================
+        // SEARCH OPERATIONS
 
         /**
          * Search for nodes by title (case-insensitive, partial match).
@@ -285,7 +285,7 @@ public class DoublyLinkedList {
             }
         }
 
-        // ==================== GET OPERATIONS ====================
+        //  GET OPERATIONS
 
         /**
          * Retrieve a node by its unique ID.
@@ -305,8 +305,7 @@ public class DoublyLinkedList {
             return null;
         }
 
-        // ==================== TRAVERSAL OPERATIONS ====================
-
+        //  TRAVERSAL OPERATIONS
         /**
          * Traverse the list from HEAD to TAIL (forward direction).
          * Time Complexity: O(n)
@@ -361,7 +360,7 @@ public class DoublyLinkedList {
             System.out.println("  Total Notes: " + size);
         }
 
-        // ==================== SORT OPERATIONS ====================
+        //  SORT OPERATIONS
 
         /**
          * Sort the list by PRIORITY using Bubble Sort (ascending: 1 first).
@@ -447,7 +446,7 @@ public class DoublyLinkedList {
             b.getLinkedNoteIds().addAll(tempLinked);
         }
 
-        // ==================== DISPLAY HELPERS ====================
+        //  DISPLAY HELPERS
 
         /**
          * Display all notes in a formatted table (forward traversal).
@@ -472,4 +471,5 @@ public class DoublyLinkedList {
         private void printTableFooter() {
             System.out.println("└──────┴──────────────────────┴─────────────────┴────────────┴──────────────┘");
         }
-}
+    }
+
