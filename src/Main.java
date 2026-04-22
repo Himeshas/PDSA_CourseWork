@@ -12,7 +12,7 @@ public class Main {
         StudyNoteManager manager = new StudyNoteManager();
 
         // Welcome screen
-        ConsoleHelper.printHeader("📚 SMART STUDY NOTE MANAGER");
+        ConsoleHelper.printHeader(" SMART STUDY NOTE MANAGER");
         ConsoleHelper.printInfo("Powered by Doubly Linked List (DLL)");
 
         // Ask if user wants to load sample data
@@ -95,7 +95,7 @@ public class Main {
                         System.out.println();
                         ConsoleHelper.printDivider();
                         ConsoleHelper.printSuccess("Thank you for using Smart Study Note Manager!");
-                        ConsoleHelper.printInfo("Goodbye! 👋");
+                        ConsoleHelper.printInfo("Goodbye! ");
                         ConsoleHelper.printDivider();
                     }
                     break;
