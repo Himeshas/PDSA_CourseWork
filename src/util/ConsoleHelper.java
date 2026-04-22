@@ -73,7 +73,9 @@ public class ConsoleHelper {
         return input.isEmpty() ? currentValue : input;
     }
 
-    public static int readInt(Scanner scanner, String prompt, int min, int max) {
+
+
+   public static int readInt(Scanner scanner, String prompt, int min, int max) {
         while (true) {
             System.out.print(YELLOW + "  " + prompt + " (" + min + "-" + max + "): " + RESET);
             String input = scanner.nextLine().trim();
